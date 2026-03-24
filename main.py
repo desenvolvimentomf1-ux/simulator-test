@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import asyncio
 from playwright.async_api import async_playwright
 
 app = FastAPI()
@@ -33,14 +32,12 @@ async def run_simulation(data):
         }
 
         try:
-            # 1. Login
             await page.goto("https://site-de-veiculos.com.br/login")
             await page.fill("input[name='email']", data["email_cliente"])
             await page.fill("input[name='password']", data["senha"])
             await page.click("button[type='submit']")
             await page.wait_for_url("**/dashboard", timeout=10000)
 
-            # 2. Navegar e simular
             await page.goto(
                 f"https://site-de-veiculos.com.br/veiculo/{data['id_veiculo']}"
             )
@@ -49,7 +46,6 @@ async def run_simulation(data):
             await page.fill("#nome_completo", data["nome_cliente"])
             await page.click("button:has-text('Confirmar Simulação')")
 
-            # 3. Capturar resultado
             await page.wait_for_selector(".resultado-simulacao", timeout=15000)
             resultado_texto = await page.locator(
                 ".resultado-simulacao"
