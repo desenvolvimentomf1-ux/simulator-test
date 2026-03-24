@@ -54,8 +54,11 @@ async def run_simulation(data):
         return result
 ```
 
-**Arquivo 2 — `requirements.txt`**
+---
+
+Estrutura final do repositório no GitHub:
 ```
-fastapi
-uvicorn
-playwright
+meu-repositorio/
+├── Dockerfile
+├── requirements.txt
+└── main.py
