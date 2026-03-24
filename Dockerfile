@@ -2,7 +2,6 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Dependências do sistema para o Playwright/Chromium
 RUN apt-get update && apt-get install -y \
     wget curl gnupg \
     libnss3 libatk1.0-0 libatk-bridge2.0-0 \
